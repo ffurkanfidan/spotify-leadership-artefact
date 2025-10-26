@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Leadership Artefact</title>
+    
+    <!-- Animate On Scroll (AOS) Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts (Montserrat for headings, Open Sans for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- BASE STYLES --- */
+        body {
+            /* UPDATED: New Creative Background Theme */
+            background-color: #121212; /* Fallback color */
+            
+            /* A subtle radial glow from the top center, mixed with a linear gradient */
+            /* Üst merkezden gelen hafif bir parlama ve linear gradient karışımı */
+            background-image: 
+                radial-gradient(at 50% 0%, rgba(29, 185, 84, 0.15) 0%, rgba(18, 18, 18, 0) 50%),
+                linear-gradient(180deg, #1f1f1f 0%, #121212 40%, #121212 100%);
+            
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Makes the gradient stay in place */
+            
+            color: #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            overflow-x: hidden; /* Prevents AOS horizontal overflow */
+        }
+
+        /* --- HEADER AREA --- */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3.5rem;
+            color: #1DB954; /* Spotify Green */
+            margin-bottom: 10px;
+            /* UPDATED: New Title */
+            /* KALDIRILDI: Hatalı 'content' özelliği kaldırıldı */
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #B3B3B3;
+            /* UPDATED: New Subtitle (from your image) */
+            /* KALDIRILDI: Hatalı 'content' özelliği kaldırıldı */
+        }
+        
+        /* YENİ EKLENDİ: Link yönlendirme metni için stil */
+        .click-instruction {
+            font-size: 1rem;
+            color: #B3B3B3;
+            font-style: italic;
+            margin-top: 25px; /* Başlıktan biraz ayırmak için */
+        }
+        
+        /* KALDIRILDI: Tekrara neden olan gereksiz CSS hack'i kaldırıldı */
+        /*
+        header h1::before { content: "Spotify Leadership Artefact"; }
+        header p::before { content: "Music as a Mirror of Leadership and Motivation"; }
+        header h1, header p { font-size: 0; }
+        header h1::before, header p::before { font-size: initial; }
+        */
+
+
+        /* --- SECTION TITLE SEPARATOR --- */
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: #1DB954;
+            border-bottom: 2px solid #282828;
+            padding-bottom: 10px;
+            margin-top: 60px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* --- PLAYLIST ITEM CARD --- */
+        .playlist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 100px;
+            gap: 40px;
+        }
+
+        /* --- Alternating Layout (Image/Text) --- */
+        .playlist-item:nth-child(even) .item-image {
+            order: 2; /* Moves image to the right on even items */
+        }
+        
+        .playlist-item:nth-child(even) .item-content {
+            order: 1; /* Moves text to the left on even items */
+        }
+
+        /* --- IMAGE CONTAINER --- */
+        .item-image {
+            flex-basis: 50%; /* GÜNCELLENDİ: 45% idi */
+            flex-shrink: 0;
+        }
+
+        /* YENİ EKLENDİ: Görsel linklerinin altını çizmeyi engeller */
+        .item-image a {
+            display: block; /* Linkin tüm görsel alanını kaplamasını sağlar */
+            text-decoration: none;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 400px; /* GÜNCELLENDİ: 350px idi */
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .item-image img:hover {
+            transform: scale(1.05); /* Subtle zoom on hover */
+        }
+
+        /* --- TEXT CONTENT CONTAINER --- */
+        .item-content {
+            flex-basis: 50%; /* GÜNCELLENDİ: 55% idi */
+        }
+
+        .item-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: #FFFFFF;
+            margin: 0;
+        }
+
+        .item-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1.3rem;
+            color: #1DB954;
+            margin-top: 0px;
+            margin-bottom: 20px;
+        }
+
+        .item-content h4 {
+            color: #B3B3B3;
+            font-size: 1rem;
+            border-left: 3px solid #1DB954;
+            padding-left: 10px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .item-content p {
+            color: #E0E0E0;
+            font-size: 1rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+            color: #777; /* Slightly brighter for the new footer */
+            border-top: 1px solid #282828;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .playlist-item {
+                flex-direction: column; /* Stack vertically on mobile */
+                gap: 20px;
+            }
+
+            .playlist-item:nth-child(even) .item-image,
+            .playlist-item:nth-child(even) .item-content {
+                order: 0; /* Reset alternating order for mobile */
+            }
+
+            .item-image img {
+                height: 250px;
+            }
+
+            .item-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .item-content h3 {
+                font-size: 1.1rem;
+            }
+            
+            header h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* KALDIRILDI: Tekrara neden olan gereksiz CSS hack'i kaldırıldı */
+        /*
+        header h1, header p { font-size: 0; }
+        header h1::before { 
+            content: "Spotify Leadership Artefact"; 
+            font-size: 3.5rem; 
+        }
+        header p::before { 
+            content: "Music as a Mirror of Leadership and Motivation"; 
+            font-size: 1.2rem; 
+        }
+        
+        @media (max-width: 768px) {
+            header h1::before { font-size: 2.5rem; }
+        }
+        */
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- HEADER -->
+        <header data-aos="fade-down" data-aos-duration="1000">
+            <!-- UPDATED: Text is now controlled by CSS for full English replacement -->
+            <h1>Spotify Leadership Artefact</h1>
+            <p>Music as a Mirror of Leadership and Motivation</p>
+            
+            <!-- YENİ EKLENDİ: Link yönlendirme metni -->
+            <p class="click-instruction">Click on the album cover to listen to the song.</p>
+        </header>
+
+        <main>
+            <!-- SECTION 1: LEADERSHIP -->
+            <!-- UPDATED: Title to English -->
+            <h2 class="section-title" data-aos="fade-up">Leadership Theories</h2>
+
+            <!-- Song 1: Heroes -->
+            <section class="playlist-item" data-aos="fade-right">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/7Jh1bpe76CNTCgdgAdBw4Z?si=2f435d4737c640c7" target="_blank" rel="noopener noreferrer">
+                        <img src="Heroes.jpg" alt="Heroes">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Heroes" - David Bowie</h2>
+                    <h3>Transformational Leadership (Burns, 1978)</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>Transformational leadership: David Bowie encourages positive change and development in this song. The song's emotional tone, along with the lyrics "we can be heroes, just for one day," motivates the listener.</p>
+                </div>
+            </section>
+
+            <!-- Song 2: Human -->
+            <section class="playlist-item" data-aos="fade-left">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/58zsLZPvfflaiIbNWoA22O?si=c1616d2d5f2041fc" target="_blank" rel="noopener noreferrer">
+                        <img src="Human.jpg" alt="Human">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Human" - Rag'n'Bone Man</h2>
+                    <h3>Authentic Leadership (George, 2003)</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>Authentic Leadership: Rag'n'Bone Man, in this song, says "I'm only human," explaining that humans make mistakes and should be judged accordingly. A good leader can make mistakes themselves and accept those they lead for their mistakes. This song emphasizes self-awareness, transparency, and compassion.</p>
+                </div>
+            </section>
+
+            <!-- Song 3: Under Pressure -->
+            <section class="playlist-item" data-aos="fade-right">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/2fuCquhmrzHpu5xcA1ci9x?si=c9e7455118654490" target="_blank" rel="noopener noreferrer">
+                        <img src="Under Pressure.jpg" alt="Under Pressure">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Under Pressure" - Queen & David Bowie</h2>
+                    <h3>Adaptive Leadership (Heifetz, 1994)</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>Adaptive Leadership represents coping with challenges at different levels, leading under pressure and uncertainty. It teaches us that pressure is normal, but we must give ourselves another chance and not give up.</p>
+                </div>
+            </section>
+            
+            <!-- Song 4: Lean on Me -->
+            <section class="playlist-item" data-aos="fade-left">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/5zCJvrT3C7cIfHsR5iG95l?si=69ebc6a1e8f249c8" target="_blank" rel="noopener noreferrer">
+                        <img src="Lean On me.jpeg" alt="Lean on Me">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Lean on Me" - Bill Withers</h2>
+                    <h3>Servant Leadership (Greenleaf, 1970)</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>Servant leadership is based on the philosophy that you must serve first, then expect service. The song expects a leader to put themselves in someone else's shoes. The song emphasizes the importance of supporting each other and that a leader will always provide this.</p>
+                </div>
+            </section>
+
+            <!-- Song 5: Team -->
+            <section class="playlist-item" data-aos="fade-right">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/3G6hD9B2ZHOsgf4WfNu7X1?si=afbd38ec33054036" target="_blank" rel="noopener noreferrer">
+                        <img src="Team.jpg" alt="Team">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Team" - Lorde</h2>
+                    <h3>Distributed Leadership (Spillane, 2006)</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>Distributed leadership emphasizes that leadership resides in the team, not in one person. Lorde's lyric "We're on each other's team" in the song emphasizes the importance of teamwork and supporting each other rather than being a stumbling block.</p>
+                </div>
+            </section>
+
+
+            <!-- SECTION 2: MOTIVATION -->
+            <!-- UPDATED: Title to English -->
+            <h2 class="section-title" data-aos="fade-up">Motivation & Management</h2>
+
+            <!-- Song 6: Lose Yourself -->
+            <section class="playlist-item" data-aos="fade-left">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/5Z01UMMf7V1o0MzF86s6WJ?si=67d34e60ab874588" target="_blank" rel="noopener noreferrer">
+                        <img src="Lose Yourself.jpg" alt="Lose Yourself">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Lose Yourself" - Eminem</h2>
+                    <h3>Motivation (Content Theory, Purpose) (Pink, 2009)</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>In this song, Eminem emphasizes the importance of never wasting an opportunity, working hard, and never giving up. He reminds us that despite all the challenges, there is always a way out. He advises seizing the moment and not dwelling on the past.</p>
+                </div>
+            </section>
+
+            <!-- Song 7: Viva la Vida -->
+            <section class="playlist-item" data-aos="fade-right">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/1mea3bSkSGXuIRvnydlB5b?si=e36f7c7f43144c81" target="_blank" rel="noopener noreferrer">
+                        <img src="Viva La Vida.jpg" alt="Viva la Vida">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Viva la Vida" - Coldplay</h2>
+                    <h3>Ethics & Responsible Management</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>In this song, Coldplay describes themselves as a leader in decline. They explain that things may not always go well, and that sometimes things can go wrong. Therefore, a leader should not assume they will be a leader forever and should conduct their actions within a specific ethical framework. The fact that the album cover is one of the most important and famous images of the French Revolution speaks to the song's belief in the power of change.</p>
+                </div>
+            </section>
+            
+            <!-- Song 8: Thinking Out Loud -->
+            <section class="playlist-item" data-aos="fade-left">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/34gCuhDGsG4bRPIf9bb02f?si=b43ace8fae5c4d0c" target="_blank" rel="noopener noreferrer">
+                        <img src="Thinking Out Loud.jpg" alt="Thinking Out Loud">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Thinking Out Loud" - Ed Sheeran</h2>
+                    <h3>Six 'Thinking Hats' (De Bono, 1985)</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>De Bono's Six Hat Thinking Technique aims to solve problems through different ways of thinking. This song, too, evokes a problem-solving style dominated by emotional intelligence and intuition, dressed in a red hat. This song highlights the emotional side of people and contributes to finding solutions that cannot be achieved through logic alone.</p>
+                </div>
+            </section>
+
+            <!-- Song 9: Whatever It Takes -->
+            <section class="playlist-item" data-aos="fade-right">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/6Qn5zhYkTa37e91HC1D7lb?si=d9c0f0e130764d9f" target="_blank" rel="noopener noreferrer">
+                        <!-- FIXED: Updated to .png extension -->
+                        <img src="Whatever it Takes.png" alt="Whatever It Takes">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Whatever It Takes" - Imagine Dragons</h2>
+                    <h3>Strategic Planning & Vision Setting</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>The song discusses the importance of strategic planning and the need for determination to achieve long-term goals. The phrase "Whatever It Takes," which also serves as the song's title and appears in the song itself, emphasizes the determination, resilience, and willpower required to achieve a set goal.</p>
+                </div>
+            </section>
+
+            <!-- Song 10: Heal the World -->
+            <section class="playlist-item" data-aos="fade-left">
+                <div class="item-image">
+                    <!-- GÜNCELLENDİ: Görsel link ile sarıldı -->
+                    <a href="https://open.spotify.com/track/7woW97CfcWaKtuC6W5BP2K?si=e08dc4dab94f4c84" target="_blank" rel="noopener noreferrer">
+                        <img src="heal The World.jpg" alt="Heal the World">
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2>"Heal the World" - Michael Jackson</h2>
+                    <h3>Design Thinking & Empathy (Kelley, 2005)</h3>
+                    <!-- UPDATED: Text to English -->
+                    <h4>Concept:</h4>
+                    <p>The cornerstone of Design Thinking is empathy. This song advises understanding the needs of others, setting out to help others with compassion, and taking responsibility for a better world. This promotes being people-centered and caring about the problems faced by others.</p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <!-- UPDATED: Footer text -->
+            <p>Furkan Fidan - Spotify Leadership Artefact - 2025</p>
+        </footer>
+
+    </div>
+
+    <!-- AOS JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate on Scroll)
+        AOS.init({
+            duration: 800,  // Animation speed
+            once: true,     // Animate only once
+            offset: 100,    // Trigger animation 100px before element is visible
+        });
+    </SCript>
+
+</body>
+</html>
+
+
+
+
